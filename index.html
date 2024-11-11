@@ -3,14 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Click</title>
+  <title>Idle Clicker Game</title>
+  <style>
+    /* Add some basic styling */
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    #resources {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    #clickButton {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin-bottom: 20px;
+    }
+    #buildings button {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      font-size: 16px;
+    }
+  </style>
 </head>
 <body>
-  <div id="buildings">
+  <h1>Idle Clicker Game</h1>
+  <div>Resources: <span id="resources">0</span></div>
+  <div>Resources Per Second: <span id="rps">0</span></div>
+  <button id="clickButton">Click Me!</button>
+  <div id="buildings"></div>
 
-  </div>
-  <script src="js/main.js"></script>
-  <script src="js/game.js"></script>
+  <!-- Load scripts in the correct order -->
   <script src="js/buildings.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

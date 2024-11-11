@@ -16,7 +16,7 @@ class Building {
         this.baseCost = baseCost;
         this.baseProduction = baseProduction;
         this.currentProduction = baseProduction;
-        this.cost = baseCost;
+        this.cost = 15;
         this.count = 0;
     }
 

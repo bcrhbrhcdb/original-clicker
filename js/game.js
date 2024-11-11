@@ -2,6 +2,7 @@ class Game {
     constructor(buildingsData) {
         this.clicks = 0;
         this.resources = 0;
+        this.totalResources = 0;
         this.amountPerClick = 1;
         this.buildings = buildingsData.map(building => new Building(building.id, building.name, building.baseCost, building.baseProduction));
         this.lastUpdate = Date.now();
@@ -21,18 +22,23 @@ class Game {
 
     display() {
         console.log(`Resources: ${this.resources.toFixed(2)}`);
+        const resources = document.getElementById("resources");
+        resources.innerText = this.resources;
         const buildingArea = document.getElementById("buildings");
         buildingArea.innerHTML = ''; // Clear existing buttons
 
         this.buildings.forEach(building => {
             const buildingButton = document.createElement("button");
+            buildingButton.style.display = "none";
             buildingButton.id = `building-${building.id}`;
-            buildingButton.textContent = `${building.name} (${building.count})`;
-            buildingButton.onclick = () => this.buyBuilding(building.id);
-            buildingButton.disabled = this.resources < building.cost;
-
+            buildingButton.innerHTML = `${building.name}  (${building.count}) <br> gives ${building.baseProduction}/s`;
+            if(this.totalResources >= building.baseCost){
+                buildingButton.style.display = "block";
+                buildingButton.onclick = () => this.buyBuilding(building.id);
+                buildingButton.disabled = this.resources < building.cost;
+            }
             const costSpan = document.createElement("span");
-            costSpan.textContent = ` Cost: ${building.cost}`;
+            costSpan.innerHTML = ` <br> Cost: ${building.cost}`;
             buildingButton.appendChild(costSpan);
 
             buildingArea.appendChild(buildingButton);
@@ -51,8 +57,7 @@ class Game {
     click() {
         this.clicks += this.amountPerClick;
         this.resources += this.amountPerClick;
+        this.totalResources += this.amountPerClick;
         this.display();
     }
 }
-
-// main.js
